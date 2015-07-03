@@ -16,6 +16,7 @@ from django.contrib.auth.models import User
 from django.http import HttpResponseRedirect
 from django.utils.translation import ugettext_lazy as _
 from django.core.urlresolvers import reverse
+from django.utils import timezone
 
 from biz.account.forms import CloudUserCreateForm
 from biz.account.models import Contract, Operation, Quota, UserProxy, QUOTA_ITEM
@@ -132,13 +133,9 @@ def update_contract(request):
         pk = request.data['id']
 
         contract = Contract.objects.get(pk=pk)
-
         contract.name = request.data['name']
-
         contract.customer = request.data['customer']
-
         contract.start_date = datetime.strptime(request.data['start_date'], '%Y-%m-%d %H:%M:%S')
-
         contract.end_date = datetime.strptime(request.data['end_date'], '%Y-%m-%d %H:%M:%S')
 
         contract.save()
@@ -157,9 +154,14 @@ def delete_contracts(request):
 
         contract_ids = request.data.getlist('contract_ids[]')
 
-        Contract.living.filter(pk__in=contract_ids).update(deleted=True)
+        for contract_id in contract_ids:
 
-        Quota.living.filter(contract__pk__in=contract_ids).update(deleted=True)
+            contract = Contract.objects.get(pk=contract_id)
+            contract.deleted = True
+            contract.save()
+            Quota.living.filter(contract__pk=contract_id).update(deleted=True, update_date=timezone.now())
+
+            Operation.log(contract, contract.name, 'delete', udc=contract.udc)
 
         return Response({'success': True, "msg": _('Contracts have been deleted!')}, status=status.HTTP_201_CREATED)
 
@@ -225,7 +227,9 @@ def create_quotas(request):
             resource, limit = resources[index], limits[index]
 
             if quota_id and Quota.living.filter(contract=contract, pk=quota_id).exists():
-                Quota.objects.filter(pk=quota_id).update(resource=resource, limit=limit)
+                Quota.objects.filter(pk=quota_id).update(resource=resource,
+                                                         limit=limit,
+                                                         update_date=timezone.now())
             else:
                 Quota.objects.create(resource=resource, limit=limit, contract=contract)
 
