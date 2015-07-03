@@ -421,7 +421,7 @@ CloudApp.config(['$stateProvider', '$urlRouterProvider',
             // image
             .state("image", {
                 url: "/image/",
-                templateUrl: "/static/cloud/views/image.html",
+                templateUrl: "/static/management/views/image.html",
                 data: {pageTitle: 'Image'},
                 controller: "ImageController",
                 resolve: {
@@ -430,7 +430,7 @@ CloudApp.config(['$stateProvider', '$urlRouterProvider',
                             name: 'CloudApp',
                             insertBefore: '#ng_load_plugins_before',
                             files: [
-                                '/static/cloud/controllers/image_ctl.js'
+                                '/static/management/controllers/image_ctrl.js'
                             ]
                         });
                     }]
