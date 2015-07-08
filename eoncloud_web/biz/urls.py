@@ -17,6 +17,7 @@ from biz.overview import views as overview_views
 # instance&flavor
 urlpatterns = [
         url(r'^management-summary/$', overview_views.summary),
+        url(r'^init/$', overview_views.init),
         url(r'^instances/$', instance_view.InstanceList.as_view()),
         #url(r'^instances/(?P<pk>[0-9]+)/$', instance_view.InstanceDetail.as_view()),
         url(r'^instances/status/$', instance_view.instance_status_view),

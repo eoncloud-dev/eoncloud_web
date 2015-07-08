@@ -365,7 +365,7 @@
 
   "data_center":{
     "name": "名称",
-    "host": "主机名",
+    "host": "主机地址",
     "project": "项目名",
     "user": "用户名",
     "password": "用户密码",
@@ -408,6 +408,16 @@
     "no": "否",
     "deactivate": "禁止",
     "activate": "激活"
-  }
+  },
 
+  "init_wizard": {
+    "title": "易用云初始化 - 步骤",
+    "data_center": "数据中心",
+    "flavor": "主机规格",
+    "image": "镜像",
+    "init_your_data_center": "请初始化您的数据中心",
+    "init_your_flavor": "请初始化您的主机规格",
+    "init_your_image": "请初始化您的镜像",
+    "confirm_data": "确认初始化参数"
+  }
 }
