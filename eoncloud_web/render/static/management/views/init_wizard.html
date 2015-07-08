@@ -1,0 +1,362 @@
+<div class="row">
+    <div class="col-md-12">
+        <div class="portlet box blue" id="cloud-wizard">
+            <div class="portlet-title">
+                <div class="caption">
+                    <i class="fa fa-gift"></i> {[{ 'init_wizard.title' | i18next }]} <span class="step-title"> 1 / 4 </span>
+                </div>
+            </div>
+            <div class="portlet-body form">
+                <form action="#" class="form-horizontal" id="wizardForm" method="POST">
+                    <!-- BEGIN FORM WIZARD -->
+                    <div class="form-wizard">
+                        <!-- BEGIN FORM BODY -->
+                        <div class="form-body">
+                            <!-- BEGIN NAV BAR -->
+                            <ul class="nav nav-pills nav-justified steps">
+                                <li>
+                                    <a href="#tab1" data-toggle="tab" class="step">
+                                        <span class="number"> 1 </span>
+                                        <span class="desc">
+                                            <i class="fa fa-check"></i> {[{ 'init_wizard.data_center' | i18next }]}
+                                        </span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#tab2" data-toggle="tab" class="step">
+                                        <span class="number"> 2 </span>
+                                        <span class="desc">
+                                            <i class="fa fa-check"></i> {[{ 'init_wizard.flavor' | i18next }]}
+                                        </span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#tab3" data-toggle="tab" class="step active">
+                                        <span class="number"> 3 </span>
+                                        <span class="desc">
+                                            <i class="fa fa-check"></i> {[{ 'init_wizard.image' | i18next }]}
+                                        </span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#tab4" data-toggle="tab" class="step">
+                                        <span class="number"> 4 </span>
+                                        <span class="desc"> <i class="fa fa-check"></i> {[{ 'confirm' | i18next }]} </span>
+                                    </a>
+                                </li>
+                            </ul>
+                            <!-- END NAV BAR -->
+                            <div id="bar" class="progress progress-striped" role="progressbar">
+                                <div class="progress-bar progress-bar-success"> </div>
+                            </div>
+
+                            <!-- BEGIN TAB CONTENT -->
+                            <div class="tab-content">
+                                <div class="tab-pane active" id="tab1">
+                                    <h3 class="block"> {[{ 'init_wizard.init_your_data_center' | i18next }]} </h3>
+                                    <div class="form-group">
+                                        <label class="col-md-3 control-label" for="data_center_name">
+                                            {[{ 'data_center.name' | i18next }]}
+                                        </label>
+                                        <div class="col-md-5">
+                                            <input id="data_center_name" name="data_center_name"
+                                                   type="text" class="form-control input-medium"
+                                                   data-ng-model="data_center.name">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-md-3 control-label" for="host">
+                                            {[{ 'data_center.host' | i18next }]}
+                                        </label>
+                                        <div class="col-md-5">
+                                            <input id="host" name="host" type="text"
+                                                   data-ng-model="data_center.host" class="form-control input-medium">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-md-3 control-label" for="project">
+                                            {[{ 'data_center.project' | i18next }]}
+                                        </label>
+                                        <div class="col-md-5">
+                                            <input id="project" name="project" type="text"
+                                                   data-ng-model="data_center.project" class="form-control input-medium">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-md-3 control-label" for="user">
+                                            {[{ 'data_center.user' | i18next }]}
+                                        </label>
+                                        <div class="col-md-5">
+                                            <input id="user" name="user" type="text"
+                                                   data-ng-model="data_center.user" class="form-control input-medium">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-md-3 control-label" for="password">
+                                            {[{ 'data_center.password' | i18next }]}
+                                        </label>
+                                        <div class="col-md-5">
+                                            <input id="password" name="password" type="text"
+                                                   data-ng-model="data_center.password" class="form-control input-medium">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-md-3 control-label" for="auth_url">
+                                            {[{ 'data_center.auth_url' | i18next }]}
+                                        </label>
+                                        <div class="col-md-5">
+                                            <input id="auth_url" name="auth_url" type="text"
+                                                   data-ng-model="data_center.auth_url" class="form-control input-medium">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-md-3 control-label" for="ext_net">
+                                            {[{ 'data_center.ext_net' | i18next }]}
+                                        </label>
+                                        <div class="col-md-5">
+                                            <input id="ext_net" name="ext_net" type="text"
+                                                   data-ng-model="data_center.ext_net" class="form-control input-medium">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="tab-pane" id="tab2">
+                                    <h3 class="block"> {[{ 'init_wizard.init_your_flavor' | i18next }]} </h3>
+                                    <div class="form-group">
+                                        <label class="col-md-3 control-label" for="flavor_name">
+                                            {[{ 'flavor.name' | i18next }]}
+                                        </label>
+                                        <div class="col-md-5">
+                                            <input id="flavor_name" name="flavor_name" type="text"
+                                               data-ng-model="flavor.name" class="form-control input-medium">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-md-3 control-label" for="cpu">{[{ 'flavor.cpu' | i18next }]} </label>
+                                        <div class="col-md-5">
+                                            <input id="cpu" name="cpu" type="text" maxlength="20"
+                                                   data-ng-model="flavor.cpu" class="form-control input-medium">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-md-3 control-label" for="memory">{[{ 'flavor.memory' | i18next }]} </label>
+                                        <div class="col-md-5">
+                                            <input id="host" name="memory" type="text" maxlength="20"
+                                                   data-ng-model="flavor.memory" class="form-control input-medium">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-md-3 control-label" for="price">{[{ 'flavor.price' | i18next }]} </label>
+                                        <div class="col-md-5">
+                                            <input id="price" name="price" type="text" maxlength="20"
+                                                   data-ng-model="flavor.price" class="form-control input-medium">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="tab-pane" id="tab3">
+                                    <h3 class="block"> {[{ 'init_wizard.init_your_image' | i18next }]} </h3>
+                                    <div class="form-group">
+                                        <label class="col-md-3 control-label" for="image_name">
+                                            {[{ 'image.name' | i18next }]}
+                                            <span class="required" aria-required="true"> * </span>
+                                        </label>
+                                        <div class="col-md-5">
+                                            <input id="image_name" name="image_name" type="text" maxlength="50"
+                                               data-ng-model="image.name" class="form-control input-medium required">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-md-3 control-label" for="uuid">
+                                            {[{ 'image.uuid' | i18next }]}
+                                            <span class="required" aria-required="true"> * </span>
+                                        </label>
+                                        <div class="col-md-5">
+                                            <input id="uuid" name="uuid" type="text" maxlength="255"
+                                                   data-ng-model="image.uuid" class="form-control input-medium required">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-md-3 control-label" for="login_name">
+                                            {[{ 'image.login_name' | i18next }]}
+                                            <span class="required" aria-required="true"> * </span>
+                                        </label>
+                                        <div class="col-md-5">
+                                            <input id="login_name" name="login_name" type="text" maxlength="50"
+                                                   data-ng-model="image.login_name" class="form-control input-medium required">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-md-3 control-label" for="os_type">
+                                            {[{ 'image.os_type' | i18next }]}
+                                            <span class="required" aria-required="true"> * </span>
+                                        </label>
+                                        <div class="col-md-5">
+                                            <select id="os_type" name="os_type" data-ng-model="image.os_type"
+                                                    class="form-control input-medium"
+                                                    data-ng-options="os.key as os.label for os in os_types">
+                                                <option value="">{[{ 'image.select_os_type' | i18next }]}</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-md-3 control-label" for="data_center">
+                                            {[{ 'image.data_center' | i18next }]}
+                                        </label>
+                                        <div class="col-md-5"> {[{ data_center.name }]}  </div>
+                                    </div>
+                                </div>
+                                <div class="tab-pane" id="tab4">
+                                    <h3 class="block">{[{ 'init_wizard.confirm_data' | i18next }]}</h3>
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <h4 class="form-section">{[{ 'init_wizard.data_center' | i18next }]}</h4>
+                                            <div class="form-group">
+                                                <label class="control-label col-md-3">{[{ 'data_center.name' | i18next }]}:</label>
+                                                <div class="col-md-4">
+                                                    <p class="form-control-static"> {[{ data_center.name }]} </p>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="control-label col-md-3">{[{ 'data_center.host' | i18next }]}:</label>
+                                                <div class="col-md-4">
+                                                    <p class="form-control-static"> {[{ data_center.host }]} </p>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="control-label col-md-3">{[{ 'data_center.project' | i18next }]}:</label>
+                                                <div class="col-md-4">
+                                                    <p class="form-control-static"> {[{ data_center.project }]} </p>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="control-label col-md-3">{[{ 'data_center.user' | i18next }]}:</label>
+                                                <div class="col-md-4">
+                                                    <p class="form-control-static"> {[{ data_center.user }]} </p>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="control-label col-md-3">{[{ 'data_center.password' | i18next }]}:</label>
+                                                <div class="col-md-4">
+                                                    <p class="form-control-static"> {[{ data_center.password }]} </p>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="control-label col-md-3">{[{ 'data_center.auth_url' | i18next }]}:</label>
+                                                <div class="col-md-4">
+                                                    <p class="form-control-static"> {[{ data_center.auth_url }]} </p>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="control-label col-md-3">{[{ 'data_center.ext_net' | i18next }]}:</label>
+                                                <div class="col-md-4">
+                                                    <p class="form-control-static"> {[{ data_center.ext_net }]} </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <h4 class="form-section">{[{ 'init_wizard.flavor' | i18next }]}</h4>
+                                            <div class="form-group">
+                                                <label class="col-md-3 control-label" for="flavor_name">
+                                                    {[{ 'flavor.name' | i18next }]}
+                                                </label>
+                                                <div class="col-md-5">
+                                                    <p class="form-control-static"> {[{ flavor.name }]} </p>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-md-3 control-label" for="cpu">{[{ 'flavor.cpu' | i18next }]} </label>
+                                                <div class="col-md-5">
+                                                    <p class="form-control-static"> {[{ flavor.cpu }]} </p>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-md-3 control-label" for="memory">{[{ 'flavor.memory' | i18next }]} </label>
+                                                <div class="col-md-5">
+                                                    <p class="form-control-static"> {[{ flavor.memory }]} </p>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-md-3 control-label" for="price">{[{ 'flavor.price' | i18next }]} </label>
+                                                <div class="col-md-5">
+                                                    <p class="form-control-static"> {[{ flavor.price }]} </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <h4 class="form-section">{[{ 'init_wizard.image' | i18next }]}</h4>
+                                            <div class="form-group">
+                                                <label class="col-md-3 control-label" for="image_name">
+                                                    {[{ 'image.name' | i18next }]}
+                                                </label>
+                                                <div class="col-md-5">
+                                                    <p class="form-control-static"> {[{ image.name }]} </p>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-md-3 control-label" for="uuid">
+                                                    {[{ 'image.uuid' | i18next }]}
+                                                </label>
+                                                <div class="col-md-5">
+                                                    <p class="form-control-static"> {[{ image.uuid }]} </p>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-md-3 control-label" for="login_name">
+                                                    {[{ 'image.login_name' | i18next }]}
+                                                </label>
+                                                <div class="col-md-5">
+                                                    <p class="form-control-static"> {[{ image.login_name }]} </p>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-md-3 control-label" for="os_type">
+                                                    {[{ 'image.os_type' | i18next }]}
+                                                </label>
+                                                <div class="col-md-5">
+                                                    <p class="form-control-static"> {[{ image.os_type }]} </p>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-md-3 control-label">
+                                                    {[{ 'image.data_center' | i18next }]}
+                                                </label>
+                                                <div class="col-md-5"> {[{ data_center.name }]}  </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- END TAB CONTENT -->
+                        </div>
+                        <!-- END FORM BODY -->
+                        <!-- BEGIN FORM ACTIONS -->
+                        <div class="form-actions">
+                            <div class="row">
+                                <div class="col-md-offset-3 col-md-9">
+                                    <a href="javascript:void(0);" class="btn default button-previous">
+                                       <i class="m-icon-swapleft"></i> {[{ 'back' | i18next }]}
+                                    </a>
+                                    <a href="javascript:void(0);" class="btn blue button-next">
+                                       {[{ 'next' | i18next }]}  <i class="m-icon-swapright m-icon-white"></i>
+                                    </a>
+                                    <a href="javascript:void(0);" class="btn green button-submit" data-ng-click="submit()">
+                                       {[{ 'submit' | i18next }]}  <i class="m-icon-swapright m-icon-white"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- END FORM ACTIONS -->
+                    </div>
+                    <!-- END FORM WIZARD -->
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- END PAGE CONTENT-->
+
+<script>
+
+    function overview(){
+        window.location.href = "/management/";
+    }
+</script>
