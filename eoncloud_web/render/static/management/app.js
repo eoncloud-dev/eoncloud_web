@@ -190,6 +190,9 @@ CloudApp.factory('ValidationTool', function(){
 
     return {
         init: function(selector, config){
+
+            config = config || {};
+
             for(var attr in defaultConfig){
                 if(config[attr] === undefined){
                     config[attr] = defaultConfig[attr];
