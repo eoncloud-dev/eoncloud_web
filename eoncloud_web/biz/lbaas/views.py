@@ -95,7 +95,8 @@ def pool_vip_create_view(request, **kwargs):
             vip_id = request.POST.get("vip_id", '')
             if vip_id == '':
                 vip = serializer.save()
-                pool_vip_create_task(vip, pool.pool_uuid)
+
+                pool_vip_create_task(vip, pool)
                 pool.vip = vip
                 pool.save()
                 Operation.log(vip, obj_name=vip.name, action='create', result=1)
