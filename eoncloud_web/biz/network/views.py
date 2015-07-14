@@ -12,6 +12,10 @@ from rest_framework.response import Response
 from biz.instance.models import Instance
 from biz.account.models import Operation
 from biz.network.models import Network, Subnet, Router, RouterInterface
+
+from biz.network.serializer import  SubnetSerializer
+from rest_framework.response import Response
+from django.utils.translation import ugettext_lazy as _
 from biz.network.serializer import NetworkSerializer, RouterSerializer, RouterInterfaceSerializer
 from biz.instance.serializer import InstanceSerializer
 
@@ -146,6 +150,12 @@ def network_attach_router_view(request, **kwargs):
     except Exception as e:
         LOG.info('Network operation error ,%s' % e)
         return Response({"OPERATION_STATUS": 0, "MSG": _('Network operation error')})
+
+@api_view(['GET'])
+def subnet_list_view(request, **kwargs):
+    query_set = Subnet.objects.filter(deleted=False, user=request.user, user_data_center=request.session["UDC_ID"], status=NETWORK_STATE_ACTIVE)
+    serializer = SubnetSerializer(query_set,many=True)
+    return Response(serializer.data)
 
 
 def check_network_is_use(network_id):
