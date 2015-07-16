@@ -7,6 +7,7 @@ CloudApp.controller('RouterController',
             Metronic.initAjax();
         });
 
+
         $rootScope.settings.layout.pageBodySolid = true;
         $rootScope.settings.layout.pageSidebarClosed = false;
 
