@@ -94,7 +94,7 @@ def create_default_private_network(instance):
     return network
 
 @app.task
-def network_create_task(network=None):
+def network_create_task(network):
     rc = create_rc_by_network(network)
     network_params = {'name': "network-%s" % network.id, "admin_state_up": True}
     LOG.info("start create network,id:[%s],name[%s]" % (network.id, network.name))
@@ -113,10 +113,16 @@ def network_create_task(network=None):
 
 
 @app.task
-def network_delete_task(network=None):
+def network_delete_task(network):
     rc = create_rc_by_network(network)
     LOG.info("delete network,id:[%s],name[%s]" % (network.id, network.name))
     try:
+        # delete all subnet
+        LOG.info("delete all subnet, network id [%s] name[%s]" % (network.id, network.name))
+        subnet_set = Subnet.objects.filter(network_id=network.id, deleted=False)
+        for subnet in subnet_set:
+            subnet_delete_task(subnet)
+        # delete network
         net = neutron.network_delete(rc, network.network_id)
         network.network_id = None
         network.deleted = True
@@ -145,6 +151,21 @@ def subnet_create_task(subnet=None):
         sub = neutron.subnet_create(rc, **subnet_params)
         subnet.subnet_id = sub.id
         subnet.status = NETWORK_STATE_ACTIVE
+        subnet.save()
+    except Exception as ex:
+        subnet.status = NETWORK_STATE_ERROR
+        subnet.save()
+        raise ex
+
+    return subnet
+
+
+@app.task
+def subnet_delete_task(subnet):
+    rc = create_rc_by_subnet(subnet)
+    try:
+        sub = neutron.subnet_delete(rc, subnet.subnet_id)
+        subnet.deleted = True
         subnet.save()
     except Exception as ex:
         subnet.status = NETWORK_STATE_ERROR
@@ -247,16 +268,34 @@ def router_add_interface_task(router=None, subnet=None, router_interface=None):
     router.save()
 
 
+@app.task
+def network_and_subnet_create_task(network,subnet):
+    rc = create_rc_by_network(network)
+    LOG.info("Begin create network,id[%s], name[%s]" % (network.id, network.name))
+    try:
+        net = network_create_task(network)
+        LOG.info("Begin create subnet,id[%s], name[%s]" % (subnet.id, subnet.name))
+        subnet_create_task(subnet)
+    except Exception as e:
+        raise e
 
 @app.task
 def router_remove_interface_task(router=None, subnet=None, router_interface=None):
     rc = create_rc_by_router(router)
-    neutron.router_remove_interface(rc, router.router_id, subnet.subnet_id, router_interface.os_port_id)
+    try:
+        neutron.router_remove_interface(rc, router.router_id, subnet.subnet_id, router_interface.os_port_id)
+        router.status = NETWORK_STATE_ACTIVE
+        router.save()
+    except Exception as e:
+        router_interface.deleted = False
+        router_interface.save()
+        LOG.error(e)
+        router.status = NETWORK_STATE_ACTIVE
+        router.save()
 
 
 @app.task
 def network_link_router_task(router=None, subnet=None, router_interface=None):
-    subnet_create_task(subnet)
     router_add_interface_task(router=router, subnet=subnet, router_interface=router_interface)
 
 
