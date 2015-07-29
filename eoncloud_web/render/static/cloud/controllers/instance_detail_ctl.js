@@ -41,8 +41,7 @@ CloudApp.controller('InstanceDetailController',
     .controller('CpuMonitorController', MonitorControllerFactory('CPU'))
     .controller('DiskMonitorController', MonitorControllerFactory('DISK'))
     .controller('MemoryMonitorController', MonitorControllerFactory('MEMORY'))
-    .controller('IncomingBytesMonitorController', MonitorControllerFactory('INCOMING_BYTES'))
-    .controller('OutgoingBytesMonitorController', MonitorControllerFactory('OUTGOING_BYTES'));
+    .controller('NetworkMonitorController', MonitorControllerFactory('NETWORK'));
 
 function MonitorControllerFactory(urlName){
 
