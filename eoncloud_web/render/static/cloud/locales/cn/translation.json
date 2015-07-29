@@ -557,6 +557,7 @@
     "cpu": "CPU",
     "memory": "内存(MB)",
     "disk": "磁盘(GB)",
+    "network": "网络",
     "incoming_bytes": "接收流量",
     "outgoing_bytes": "发送流量",
     "modes":{
