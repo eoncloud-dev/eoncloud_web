@@ -186,20 +186,19 @@ def instance_detail_view(request, pk):
         log_data = instance_get_console_log(instance)
         return Response(log_data)
 
-
 @require_GET
 def monitor_settings(request):
     monitor_config = settings.MONITOR_CONFIG.copy()
-    monitor_config['intervals'] = MonitorInterval.\
-        filter_options(monitor_config['intervals'])
+    monitor_config['INTERVAL_OPTIONS'] = MonitorInterval.\
+        filter_options(monitor_config['INTERVAL_OPTIONS'])
 
-    monitor_config.pop('base_url')
+    monitor_config.pop('BASE_URL')
 
     return Response(monitor_config)
 
 
 class MonitorProxy(HttpProxy):
-    base_url = settings.MONITOR_CONFIG['base_url']
+    base_url = settings.MONITOR_CONFIG['BASE_URL']
 
     forbidden_pattern = re.compile(r"elasticsearch/.kibana/visualization/")
 
