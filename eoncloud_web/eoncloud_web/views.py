@@ -5,11 +5,14 @@ from django.template import RequestContext
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import login as auth_login, logout as auth_logout
+
+from biz.account.models import Notification
 from django.http import HttpResponseRedirect, JsonResponse
 from django.core.urlresolvers import reverse
-
 from biz.idc.models import DataCenter, UserDataCenter as UDC
-from biz.account.models import Notification
+from biz.account.models import UserProfile
+from cloud.tasks import link_user_to_dc_task
+
 from eoncloud_web.decorators import superuser_required
 
 
@@ -32,9 +35,17 @@ def login(request, template_name="login.html"):
     if request.method == "GET":
         authenticationForm = AuthenticationForm()
     elif request.method == "POST":
+        # try:
+        #     old_user = User.objects.get(username=request.POST.get("username", ''))
+        # except User.DoesNotExist:
+        #     old_user = None
+
         authenticationForm = AuthenticationForm(data=request.POST)
         if authenticationForm.is_valid():
             user = authenticationForm.get_user()
+            # if backend is LDAPBackend and local no exist user create localuser data_center
+            # if 'LDAPBackend' in user.backend and not old_user:
+            #     ldap_auth_local_user_create(user)
 
             auth_login(request, user)
 
@@ -55,7 +66,8 @@ def login(request, template_name="login.html"):
         "authenticationForm": authenticationForm,
         "error": authenticationForm.errors.get('__all__', None),
         "BRAND": settings.BRAND,
-        "ICP_NUMBER": settings.ICP_NUMBER
+        "ICP_NUMBER": settings.ICP_NUMBER,
+        "LDAP_AUTH_ENABLED": settings.LDAP_AUTH_ENABLED
     }))
 
 
@@ -79,3 +91,14 @@ def current_user(request):
                             'datacenter': cc_name})
     else:
         return JsonResponse({'result': {'logged': False}})
+
+
+def ldap_auth_local_user_create(ldap_user):
+    if ldap_user:
+        UserProfile.objects.create(user=ldap_user,
+                                   user_type=2)
+
+        link_user_to_dc_task(ldap_user, DataCenter.get_default())
+        return ldap_user
+    else:
+        return None
