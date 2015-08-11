@@ -30,12 +30,12 @@ from biz.idc.models import DataCenter
 from eoncloud_web.pagination import PagePagination
 from eoncloud_web.decorators import require_POST, require_GET
 from eoncloud_web.shortcuts import retrieve_params
+from cloud.tasks import link_user_to_dc_task
 
 LOG = logging.getLogger(__name__)
 
 
 def signup(request, template_name="signup.html"):
-    error = None
     if request.method == "GET":
         userCreationForm = CloudUserCreateForm()
     elif request.method == "POST":
@@ -230,6 +230,13 @@ class UserList(generics.ListAPIView):
         return Response(serializer.data)
 
 
+@require_GET
+def active_users(request):
+    queryset = UserProxy.normal_users.filter(is_active=True)
+    serializer = UserSerializer(queryset.all(), many=True)
+    return Response(serializer.data)
+
+
 class UserDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = UserProxy.normal_users.all()
     serializer_class = DetailedUserSerializer
@@ -373,6 +380,7 @@ def delete_quota(request):
 
 @api_view(["GET"])
 def get_config_view(request):
+    print settings.SITE_CONFIG
     return Response(settings.SITE_CONFIG)
 
 
@@ -463,3 +471,14 @@ def feed_status(request):
 def mark_read(request, pk):
     Feed.living.get(pk=pk).mark_read()
     return Response(status=status.HTTP_200_OK)
+
+
+@require_POST
+def initialize_user(request):
+
+    user_id = request.data['user_id']
+    user = User.objects.get(pk=user_id)
+    link_user_to_dc_task(user, DataCenter.get_default())
+
+    return Response({"success": True,
+                     "msg": _("Initialization is successful.")})
