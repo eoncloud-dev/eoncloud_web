@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-08-21 17:16+0800\n"
+"POT-Creation-Date: 2015-08-27 15:52+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,9 +18,21 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
-#: account/models.py:25
+#: account/forms.py:21
+msgid "A user with that email already exists."
+msgstr "该email地址已被人使用"
+
+#: account/forms.py:24
+msgid "Email"
+msgstr ""
+
+#: account/forms.py:25 account/models.py:25
 msgid "Mobile"
 msgstr "手机号"
+
+#: account/forms.py:68
+msgid "Activate account"
+msgstr ""
 
 #: account/models.py:26
 msgid "User Type"
@@ -50,8 +62,8 @@ msgstr "结束日期"
 #: backup/models.py:139 firewall/models.py:15 firewall/models.py:36
 #: floating/models.py:31 forum/models.py:11 forum/models.py:28
 #: instance/models.py:46 lbaas/models.py:23 lbaas/models.py:46
-#: lbaas/models.py:76 lbaas/models.py:104 network/models.py:15
-#: network/models.py:56 network/models.py:74 network/models.py:90
+#: lbaas/models.py:76 lbaas/models.py:104 network/models.py:16
+#: network/models.py:78 network/models.py:96 network/models.py:125
 #: volume/models.py:19
 msgid "Deleted"
 msgstr "已删除"
@@ -61,8 +73,8 @@ msgstr "已删除"
 #: firewall/models.py:37 floating/models.py:29 forum/models.py:12
 #: forum/models.py:29 image/models.py:25 instance/models.py:28
 #: instance/models.py:124 lbaas/models.py:22 lbaas/models.py:45
-#: lbaas/models.py:75 lbaas/models.py:103 network/models.py:16
-#: network/models.py:57 network/models.py:75 volume/models.py:18
+#: lbaas/models.py:75 lbaas/models.py:103 network/models.py:17
+#: network/models.py:79 network/models.py:97 volume/models.py:18
 msgid "Create Date"
 msgstr "创建日期"
 
@@ -202,16 +214,16 @@ msgstr "公网IP"
 msgid "Volume"
 msgstr "磁盘"
 
-#: account/settings.py:24 instance/models.py:37 network/models.py:36
-#: network/models.py:37 network/models.py:89
+#: account/settings.py:24 instance/models.py:37 network/models.py:21
+#: network/models.py:22 network/models.py:124
 msgid "Network"
 msgstr "私有网络"
 
-#: account/settings.py:25 network/models.py:61 network/models.py:62
+#: account/settings.py:25 network/models.py:83 network/models.py:84
 msgid "Subnet"
 msgstr "子网"
 
-#: account/settings.py:26 network/models.py:80 network/models.py:81
+#: account/settings.py:26 network/models.py:102 network/models.py:103
 msgid "Router"
 msgstr "路由器"
 
@@ -295,7 +307,7 @@ msgstr "通知"
 msgid "Success"
 msgstr "成功"
 
-#: account/settings.py:65 volume/settings.py:30 volume/settings.py:53
+#: account/settings.py:65
 msgid "Error"
 msgstr "错误"
 
@@ -409,8 +421,8 @@ msgstr "删除日期"
 
 #: backup/models.py:31 backup/models.py:140 floating/models.py:19
 #: instance/models.py:26 lbaas/models.py:21 lbaas/models.py:44
-#: lbaas/models.py:73 network/models.py:11 network/models.py:53
-#: network/models.py:71 volume/models.py:17
+#: lbaas/models.py:73 network/models.py:12 network/models.py:73
+#: network/models.py:93 volume/models.py:17
 msgid "Status"
 msgstr "状态"
 
@@ -519,8 +531,8 @@ msgstr "Firewall UUID"
 msgid "Firewall desc"
 msgstr "防火墙描述"
 
-#: firewall/models.py:11 firewall/models.py:33 network/models.py:12
-#: network/models.py:76
+#: firewall/models.py:11 firewall/models.py:33 network/models.py:13
+#: network/models.py:98
 msgid "Default"
 msgstr "默认"
 
@@ -580,7 +592,7 @@ msgstr "创建防火墙"
 msgid "Firewall create error"
 msgstr "创建"
 
-#: firewall/views.py:41 network/views.py:63
+#: firewall/views.py:41 network/views.py:63 volume/views.py:60
 msgid "Data valid error"
 msgstr "数据格式错误"
 
@@ -691,12 +703,12 @@ msgid "Floating Allocate"
 msgstr "分配中"
 
 #: floating/settings.py:19 floating/settings.py:34 instance/settings.py:43
-#: instance/settings.py:68 volume/settings.py:37 volume/settings.py:60
+#: instance/settings.py:68 volume/settings.py:36 volume/settings.py:57
 msgid "Applying"
 msgstr "申请中"
 
 #: floating/settings.py:20 floating/settings.py:35 instance/settings.py:44
-#: instance/settings.py:69 volume/settings.py:38 volume/settings.py:61
+#: instance/settings.py:69 volume/settings.py:37 volume/settings.py:58
 msgid "Rejected"
 msgstr "申请被拒绝"
 
@@ -1353,7 +1365,7 @@ msgstr "更新中"
 msgid "DELETING"
 msgstr "删除中"
 
-#: lbaas/settings.py:25 volume/settings.py:24 volume/settings.py:46
+#: lbaas/settings.py:25
 msgid "Creating"
 msgstr "创建中"
 
@@ -1583,17 +1595,21 @@ msgstr "构建中"
 
 #: network/views.py:42
 msgid "Network address exists"
-msgstr "私有网络删除成功"
+msgstr "地址已被占用"
 
-#: network/views.py:56
-msgid "Create network success"
-msgstr "创建私有网络成功"
+#: network/views.py:59
+msgid "The data is not valid"
+msgstr "数据有错误！"
 
-#: network/views.py:61
-msgid "Create network error"
-msgstr "创建私有网络失败"
+#: network/views.py:77
+msgid "Unkown error happened"
+msgstr "出现未知错误"
 
-#: network/views.py:67
+#: network/views.py:82
+msgid "Creating network"
+msgstr "正在创建网络"
+
+#: network/views.py:94
 msgid "The selected network not exist"
 msgstr "私有网络不存在"
 
@@ -1605,9 +1621,9 @@ msgstr "更新私有网络成功"
 msgid "Default network can not be deleted"
 msgstr "默认的私有网络不允许删除"
 
-#: network/views.py:85
-msgid "Was unable to delete the use of the network"
-msgstr "使用中的私有网络不允许删除"
+#: network/views.py:122
+msgid "This network is being used!"
+msgstr "该网络正在使用中！"
 
 #: network/views.py:89 network/views.py:96
 msgid "Network deleted success"
@@ -1617,9 +1633,9 @@ msgstr "私有网络删除成功"
 msgid "Network deleted error"
 msgstr "私有网络删除失败"
 
-#: network/views.py:103
-msgid "The selected network does not exist"
-msgstr "私有网络不存在"
+#: network/views.py:137
+msgid "Network deleted success"
+msgstr "私有网络删除成功"
 
 #: network/views.py:125 network/views.py:131
 msgid "Unkown operation"
@@ -1669,15 +1685,23 @@ msgstr "路由器不存在"
 msgid "Update router success"
 msgstr "路由器更新成功"
 
-#: network/views.py:286
+#: network/views.py:262
+msgid "Only one router can be created."
+msgstr ""
+
+#: network/views.py:270
+msgid "The selected router does not exist"
+msgstr "路由器不存在"
+
+#: network/views.py:274
 msgid "Default Router can not be deleted"
 msgstr "默认路由器不允许删除"
 
-#: network/views.py:291
-msgid "Router used can not deleted"
-msgstr "使用中的路由器不允许删除"
+#: network/views.py:278
+msgid "This router is being used."
+msgstr "该路由器正在使用中！"
 
-#: network/views.py:296
+#: network/views.py:284
 msgid "Router deleted success"
 msgstr "路由器删除成功"
 
@@ -1941,14 +1965,14 @@ msgstr "该流程成功进入下一审核环节！"
 msgid "Application is rejected."
 msgstr "申请被驳回."
 
-#~ msgid "No select Volume "
-#~ msgstr "请选择磁盘"
+#~ msgid "Router used can not deleted"
+#~ msgstr "使用中的路由器不允许删除"
 
-#~ msgid "Volume Creating"
-#~ msgstr "创建中"
+#~ msgid "Create network error"
+#~ msgstr "创建私有网络失败"
 
-#~ msgid "Volume Attaching"
-#~ msgstr "挂载中"
+#~ msgid "Create network success"
+#~ msgstr "创建私有网络成功"
 
 #~ msgid "Volume Available"
 #~ msgstr "可用"
@@ -2000,6 +2024,12 @@ msgstr "申请被驳回."
 
 #~ msgid "A user with that email already exists."
 #~ msgstr "该email地址已被人使用"
+
+#~ msgid "Unkown operation"
+#~ msgstr "未知的操作"
+
+#~ msgid "Network operation error"
+#~ msgstr "操作异常"
 
 #~ msgid "email address format error"
 #~ msgstr "电子邮件地址格式不正确"
